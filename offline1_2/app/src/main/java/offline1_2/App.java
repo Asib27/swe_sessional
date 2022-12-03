@@ -10,10 +10,13 @@ public class App {
     }
 
     public static void main(String[] args) {
-        Car car =  new TeslaCar();
-        car.buildDriveTrainSystem();
-        car.buildEngine();
-        car.paintCar();
+        // Car car =  new TeslaCar();
+        // car.buildDriveTrainSystem();
+        // car.buildEngine();
+        // car.paintCar();
+
+        CarManufacturer man = new ToyotaCarManufacturer();
+        man.manufacture();
         System.out.println(new App().getGreeting());
     }
 }

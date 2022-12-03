@@ -7,7 +7,7 @@ public class ToyotaCar extends Car {
 
     @Override
     void buildEngine() {
-        System.out.println("Installing " + "Hydrozen fuel cell " + " engine");
+        System.out.println("Installing " + "Hydrozen fuel cell" + " engine");
     }
 
     @Override
