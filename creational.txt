@@ -1,0 +1,201 @@
+# Design Principles
+## Encapsulate What Varies
+Identify the aspects of your application that vary and separate them from what stays the same.
+
+- Minimize the effect caused by the change
+
+## Program to an interface, not an implementation
+Depend on abstractions not on concrete class
+
+## Favour Composition Over Inheritance
+Try to think in terms of has a relationship
+
+# SOLID Principles
+## Single Responsibility Principle
+A class should have just one reason to change
+
+If a class performs more than one task, then it may have more than one reason to change. Try to move differant task to other classes.
+
+## Open/Closed Principles
+Classes should be open for extension but closed for modifications.
+
+## Liskov Substitution Principle
+When extending a class, you should be able to pass objects of the subclass in place of objects of the parent class without breaking the client code.
+
+- Parameter types in a method of a subclass should match or be more abstract than parameter types in the method of the superclass.
+- The return type in a method of a subclass should match or be subtype of the return type in method of superclass.
+- A method in a subclass shouldnt throw types of exceptions which the base method isnt expected to throw.
+- A subclass shouldn't strenghten pre-conditions.
+- A subclass shoudnt't weaken post-conditions.
+- Invariants of superclass must be preserved
+- A subclass shouldn't change values of private fields of the superclass.
+
+## Interface Segregation Principle
+Clients shouldn't be forced to depend on methods they do not use.
+
+Try to keep interfaces narrow.
+
+## Dependancy Inversion Principle
+High level classes shouldn't depend on low-level classes.
+Both should depend on abstractions.
+Abstractions shouldn't depend on details.
+Details should depend on abstractions.
+
+# Defination
+## Factory
+A function method or class that supposed to be producing something.
+
+## Creation method
+A method that creates object. It is a wrapper around a constructor call which may help to isolate code from constructor change or contain some particular logic. 
+
+## Static creation method
+A creation method that is declared static
+
+## Simple Factory method
+A method with a large conditional to choose and return a particular subclass.
+
+
+# Factory Method
+
+Factory method is a creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+
+- Object created by factory method is known as product
+- Replace direct object constrution with new operator with calls to special factory method. Objects are created in the Factory method using new. 
+- Now factory method can be overriden by the subclass to return differanct product.
+
+Creator contains a factory, the subcreator1 and subcreator2 can subclass and override factory methods. All factory methods returns product(differant subclass of product). In this way, subclass dicides which object will be created.
+
+## Applicability
+- When i dont know exact type and dependencies of products. For example: my code works for productA ... but it may need to work for productB, productC etc. In this case, product will be a common interface. User of productA, productB, productC will be the creator class.
+
+- When i want to provide users(developers) a way to extend its internal components.
+
+- When Object reuse is required
+
+## Implementation
+- Make all products follow same interface.
+- Add factory method with return type product in creator class.
+- Replace all references of product object creation(new operator) should be replaced by calls to factory method. A temporary parameter can be added to factory method to facilate testing during code refactoring. For example: 
+
+Let, two type of product is intantiated at creator class, productA and productB. For facilating refactoring, factory method will be defined as productFactory(string type). Now, in creator class, object creation of productA(i.e. A = new productA()) will be replaced by A = productFactory("A") and B = new productB() will be replaced by B = productFactory("B")
+
+- Create Creator subclass for each type of product. Override the factory method to differ object creation. If same class requires many product types then factory method with argument can be used.
+
+
+## Pros and Cons
+### Pros
+- Avoids tight coupling.
+- Single responsibility principle.
+- Open close principle.
+### Cons
+- Code becomes complicated because of many subclasses.
+
+
+# Abstract Factory
+Its a creational design pattern that let us produce families of related objects without specifying their concrete class.
+
+- More than one type of product are there in this pattern. Subclass decides creation of product of its type
+- Client code must work with product and factories by their interfaces.
+
+## Applicability
+- Use when code needs to work with families of related products and product types are unknown beforehand.
+- If a creator class of factory methods has a set of factory methods.
+
+## Implementation
+- Map out a matrix of distinct product types vs variant of these products
+- Create abstract product and abstract factory interface. Implement concrete product objects. Create concrete factory objects to use concrete product objects.
+- Create factory initialization code and pass factory to client code. Replace object creation command(new) with call to factory method.
+
+## Pros and Cons
+### Pros
+- Products are consistant.
+- Avoids tight coupling.
+- Single responsibility principle
+- Open close principle
+
+### Cons
+- More complicated due to lot of interfaces and classes.
+
+
+# Builder
+Its a creational design pattern that let us construct an object step by step.
+
+- Allows to produce differant types and representations of an object using the same construction code.
+- If an object has differant variant controlled by many parameters then we can switch to step by step builder pattern.
+- It extracts object construction code out of its own class and moves it to the dedicated object creation class named builder.
+- A director class can be used, where object creation steps can be packed in a module. A director directs the object creation process, so client code can get required objects by passing appropiate builder to director.
+
+## Applicability
+- To get rid of 'telescoping constructor' or constructor with many parameters.
+- To create differant representation of same product
+- To construct Composite trees or other complex objects.
+
+## Implementation
+- Clearly Define common construction steps.
+- Define the steps in base builder interface.
+- Create a concrete builder class for each type of product. Add a getProduct method. Builder may or may not return products of same inheritance hierarchy. If builders return products of same hierarchy, getProduct method can be added in the interface.
+- Think about creating a director. Client must create both director and builder. Builder should be passed to the director.
+
+## Pros and Cons
+### Pros
+- Step by step construction
+- Reuse same construction code for various representation of product
+- Single responsibility principle.
+### Cons
+- Complexity increases due to addition of new classes.
+
+
+# Prototype
+Its a creational pattern that let us copy existing objects without making our code dependent on their classes.
+
+- Not all objects can be copied, as some fields may be private.
+- Direct copying increases dependancy.
+- Sometimes only the interface is known not the concrete class.
+- This pattern delegates the cloning process to actual object.
+- Cloning can prevent us from creating excess subclass. Common configurations of a class can be saved and they can be cloned when new instances are required. For this a prototype registry can be used. Prototype registry stores the frequently used objects on a hashmap . And clones them when required.
+
+## Applicability
+- When code shoudn't depend on the concrete classes of object, we need to copy
+- Use to reduct number of subclass
+
+## Implementation
+- Create prototype interface with clone method in it.
+- A prototype class must declare the alternative constructor that accepts an object of that class as an argument.
+- A prototype registry can be created if required.
+
+## Pros and Cons
+### Pros
+- Clonig without coupling to their concrete class.
+- Getting rid of repeated initialization code.
+- Conveniently producing of complex objects.
+- Alternative to inheritance when dealing with configuration presets for complex objects.
+### Cons
+- Cloning object with circular references maybe tricky.
+
+
+# Singleton
+Its a creational pattern that let us ensure that a class has only one instance,
+
+- Ensures a class has single instance : useful for managing access to shared resource.
+- Providing a global access point to that instance: provides global access to the shared resource.
+
+## Applicability
+- Use singleton pattern when class should have single instance.
+- Use when stricter control over global variable is necessary.
+
+## Implementation
+- Add a private static field
+- Declare public static creation method.
+- Implement lazy initialization in the static method.
+- Make the constructor private
+- Change the client code.
+
+## Pros and Cons
+### Pros
+- Lazy initialization
+- Single instance and global access point management
+### Cons
+- Violates single responsibility priniciple : Solves two problems.
+- Can mask bad design for ex: when the components know too much about each other
+- Requires special treatment in multithreaded enviornment.
+- Difficult for unit testing. Testing framework depends on inheritence when producing mock object which is not possible using this pattern.
