@@ -3,20 +3,28 @@
  */
 package offline1_2;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-        
+import java.util.Scanner;
+
+public class App {  
+    static Scanner scanner = new Scanner(System.in);
+
+    static CarManufacturer getCarManufacturer(String continent){
+        if(continent.equalsIgnoreCase("asia")) return new ToyotaCarManufacturer();
+        else if(continent.equalsIgnoreCase("europe")) return new BMWCarManufacturer();
+        else if(continent.equalsIgnoreCase("us")) return new TeslaCarManufacturer();
+        return null;
     }
 
     public static void main(String[] args) {
-        // Car car =  new TeslaCar();
-        // car.buildDriveTrainSystem();
-        // car.buildEngine();
-        // car.paintCar();
+        System.out.println("Enter Your Continent: ");
+        String continent = scanner.next();
+        
 
-        CarManufacturer man = new ToyotaCarManufacturer();
+        CarManufacturer man = getCarManufacturer(continent);
+        if(man == null){
+            System.out.println("Sorry no car available for your region");
+            return ;
+        }
         man.manufacture();
-        System.out.println(new App().getGreeting());
     }
 }
