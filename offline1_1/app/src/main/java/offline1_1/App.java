@@ -3,50 +3,13 @@
  */
 package offline1_1;
 
-import offline1_1.cooler.CPUCooler;
-import offline1_1.cooler.Cooler;
-import offline1_1.cooler.LicquidCooler;
-import offline1_1.graphics.Gb2GraphicsCard;
-import offline1_1.graphics.Gb4GraphicsCard;
-import offline1_1.graphics.GraphicsCard;
-import offline1_1.processor.*;
-import offline1_1.ram.MHz2666RAM;
-import offline1_1.ram.MHz3200RAM;
-import offline1_1.ram.RAM;
+import offline1_1.Builder.*;
 
 public class App {
     public static void main(String[] args) {
-        Cooler cooler = new CPUCooler();
-        System.out.println(cooler.getPrice()); 
-
-        cooler = new LicquidCooler();
-        System.out.println(cooler.getPrice()); 
-
-        GraphicsCard card = new Gb2GraphicsCard();
-        System.out.println(card.getName() + " " + card.getPrice());
-
-        card = new Gb4GraphicsCard();
-        System.out.println(card.getName() + " " + card.getPrice());
-
-        Processor processor = new Ryzen5700X();
-        System.out.println(processor.getName() + " " + processor.getPrice());
-
-        processor = new CoreI5();
-        System.out.println(processor.getName() + " " + processor.getPrice());
-
-        processor = new CoreI7();
-        System.out.println(processor.getName() + " " + processor.getPrice());
-
-        processor = new CoreI9();
-        System.out.println(processor.getName() + " " + processor.getPrice());
-
-        RAM ram = new MHz2666RAM();
-        System.out.println(ram.getName() + " " + ram.getPrice());
-
-        ram = new MHz3200RAM();
-        System.out.println(ram.getName() + " " + ram.getPrice());
-
-        DVDDrive dvd =  new DVDDrive();
-        System.out.println(dvd.getName() + " " + dvd.getPrice());
+        PCBuilder pcb = new Type3PCBuilder();
+        pcb.initPC();
+        PC pc = pcb.getPC();
+        System.out.println(pc);
     }
 }
