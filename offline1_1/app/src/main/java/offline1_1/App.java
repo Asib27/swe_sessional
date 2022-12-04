@@ -4,12 +4,16 @@
 package offline1_1;
 
 import offline1_1.Builder.*;
+import offline1_1.ram.*;
 
 public class App {
     public static void main(String[] args) {
-        PCBuilder pcb = new Type3PCBuilder();
-        pcb.initPC();
-        PC pc = pcb.getPC();
+        Director director = new Director(new GamingPCBuilder());
+
+        director.addRam(new MHz2666RAM());
+        director.addRam(new MHz3200RAM());
+
+        PC pc = director.getPC();
         System.out.println(pc);
     }
 }
