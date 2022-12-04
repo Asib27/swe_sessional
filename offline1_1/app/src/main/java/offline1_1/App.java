@@ -190,9 +190,22 @@ public class App {
             if(!processOpeningMenu()) break;
 
             ArrayList<PC> pcs = processOrder(director);
-            for(PC pc : pcs){
-                System.out.println(pc);
+            System.out.println("\nOrder Completed");
+            System.out.println("Total " + pcs.size() + " ordered");
+            System.out.println("=============================");
+
+
+            int total = 0;
+            for(int i = 0; i < pcs.size(); i++){
+                System.out.println("PC " + i + " details");
+                System.out.println(pcs.get(i));
+                int cur = pcs.get(i).getTotalPrice();
+                System.out.println("Total " + cur + "/=");
+                System.out.println("==============");
+
+                total += cur;
             }
+            System.out.println("Grand Total = BDT " + total + "/=");
         }
         
         System.out.println("Thank You");

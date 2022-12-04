@@ -73,23 +73,36 @@ public class PC {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(pcbase.getName() + " " + pcbase.getPrice() + "\n");
-        sb.append(processor.getName() + " " + processor.getPrice() + "\n");
+        sb.append(pcbase.getName() + " " + pcbase.getPrice() + "/=\n");
+        sb.append(processor.getName() + " " + processor.getPrice() + "/=\n");
 
         if(cooler != null)
-            sb.append(cooler.getName() + " " + cooler.getPrice() + "\n");
+            sb.append(cooler.getName() + " " + cooler.getPrice() + "/=\n");
 
         if(drive != null)
-            sb.append(drive.getName() + " " + drive.getPrice() + "\n");
+            sb.append(drive.getName() + " " + drive.getPrice() + "/=\n");
 
         for(var ram : rams){
-            sb.append(ram.getName() + " " + ram.getPrice() + "\n");
+            sb.append(ram.getName() + " " + ram.getPrice() + "/=\n");
         }
 
         for(var card : graphicsCards){
-            sb.append(card.getName() + " " + card.getPrice() + "\n");
+            sb.append(card.getName() + " " + card.getPrice() + "/=\n");
         }
 
         return sb.toString();
+    }
+
+    public int getTotalPrice(){
+        int price = 0;
+        price += pcbase.getPrice();
+        price += processor.getPrice();
+        price += cooler==null? 0: cooler.getPrice();
+        price += drive==null? 0: drive.getPrice();
+        
+        for(RAM ram : rams) price += ram.getPrice();
+        for(GraphicsCard card : graphicsCards) price += card.getPrice();
+
+        return price;
     }
 }
