@@ -9,6 +9,7 @@ import offline1_1.cooler.LicquidCooler;
 import offline1_1.graphics.Gb2GraphicsCard;
 import offline1_1.graphics.Gb4GraphicsCard;
 import offline1_1.graphics.GraphicsCard;
+import offline1_1.processor.*;
 
 public class App {
     public static void main(String[] args) {
@@ -23,5 +24,19 @@ public class App {
 
         card = new Gb4GraphicsCard();
         System.out.println(card.getName() + " " + card.getPrice());
+
+        Processor processor = new Ryzen5700X();
+        System.out.println(processor.getName() + " " + processor.getPrice());
+
+        processor = new CoreI5();
+        System.out.println(processor.getName() + " " + processor.getPrice());
+
+        processor = new CoreI7();
+        System.out.println(processor.getName() + " " + processor.getPrice());
+
+        processor = new CoreI9();
+        System.out.println(processor.getName() + " " + processor.getPrice());
+
+        
     }
 }
