@@ -3,12 +3,16 @@
  */
 package offline1_1;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import offline1_1.cooler.CPUCooler;
+import offline1_1.cooler.Cooler;
+import offline1_1.cooler.LicquidCooler;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Cooler cooler = new CPUCooler();
+        System.out.println(cooler.getPrice()); 
+
+        cooler = new LicquidCooler();
+        System.out.println(cooler.getPrice()); 
     }
 }
