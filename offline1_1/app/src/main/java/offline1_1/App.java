@@ -167,12 +167,34 @@ public class App {
         return pcs;
     }
 
+    private static boolean processOpeningMenu(){
+        while(true){
+            System.out.println("Do you want to open a new order? ");
+            System.out.println("[O] Open");
+            System.out.println("[Q] Quit");
+            String s = scn.next();
+
+            if(s.equalsIgnoreCase("o")){
+                return true;
+            }
+            else if(s.equalsIgnoreCase("q")) return false;
+            else continue;
+        }
+    }
+
     public static void main(String[] args) {
         Director director = new Director(new GamingPCBuilder());
 
-        ArrayList<PC> pcs = processOrder(director);
-        for(PC pc : pcs){
-            System.out.println(pc);
+        System.out.println("Welcome to PC Builder");
+        while(true){
+            if(!processOpeningMenu()) break;
+
+            ArrayList<PC> pcs = processOrder(director);
+            for(PC pc : pcs){
+                System.out.println(pc);
+            }
         }
+        
+        System.out.println("Thank You");
     }
 }
