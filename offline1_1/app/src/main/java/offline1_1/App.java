@@ -10,6 +10,9 @@ import offline1_1.graphics.Gb2GraphicsCard;
 import offline1_1.graphics.Gb4GraphicsCard;
 import offline1_1.graphics.GraphicsCard;
 import offline1_1.processor.*;
+import offline1_1.ram.MHz2666RAM;
+import offline1_1.ram.MHz3200RAM;
+import offline1_1.ram.RAM;
 
 public class App {
     public static void main(String[] args) {
@@ -37,6 +40,13 @@ public class App {
         processor = new CoreI9();
         System.out.println(processor.getName() + " " + processor.getPrice());
 
-        
+        RAM ram = new MHz2666RAM();
+        System.out.println(ram.getName() + " " + ram.getPrice());
+
+        ram = new MHz3200RAM();
+        System.out.println(ram.getName() + " " + ram.getPrice());
+
+        DVDDrive dvd =  new DVDDrive();
+        System.out.println(dvd.getName() + " " + dvd.getPrice());
     }
 }
