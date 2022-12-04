@@ -20,12 +20,17 @@ public class App {
             String s = scn.next();
 
             if(s.equalsIgnoreCase("e")){
-                System.out.println("Do you want to exi this order");
+                System.out.println("Do you want to exit this order");
                 System.out.println("[E] Exit");
                 System.out.println("[N] No");
 
+                s = scn.next();
                 if(s.equalsIgnoreCase("e")){
                     return 0;
+                }
+                else{
+                    System.out.println("Enter your choice: ");
+                    continue;
                 }
             }
 
@@ -63,7 +68,7 @@ public class App {
             System.out.println("[0] Quit without adding");
             System.out.println("Your choice [0-2]: ");
 
-            ramType = scn.nextInt();
+            ramType = inputHelper();
             if(ramType == 0) break;
             else if(ramType < 0 || ramType > 2){
                 System.out.println("Invalid Choice. Should be between 0-2");
@@ -91,7 +96,7 @@ public class App {
             System.out.println("[0] Quit without adding");
             System.out.println("Your choice [0-2]: ");
 
-            type = scn.nextInt();
+            type = inputHelper();
             if(type == 0) break;
             else if(type < 0 || type > 2){
                 System.out.println("Invalid Choice. Should be between 0-2");
@@ -114,7 +119,7 @@ public class App {
             System.out.println("[4] Core i9 pc");
             System.out.println("Your choice [1-4]: ");
 
-            type = scn.nextInt();
+            type = inputHelper();
             if(type == 0) return null;
             if(type < 1 || type > 4){
                 System.out.println("Should be between 1-4\n");
