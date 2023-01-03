@@ -3,20 +3,32 @@
  */
 package vending_machine;
 
+import java.util.Scanner;
+
 public class App {
+    private static Scanner scn = new Scanner(System.in);
     public static void main(String[] args) {
         VendingMachine vending_machine = new VendingMachine();
 
-        vending_machine.insertMoney(15);
-        vending_machine.release();
+        while (true) {
+            System.out.println("Choose Option:");
+            System.out.println("[1] Insert Money");
+            System.out.println("[2] relese product");
+            System.out.println("[3] Exit");
+            System.out.println("Your choice: ");
 
-        vending_machine.insertMoney(10);
-        vending_machine.release();
-
-        vending_machine.insertMoney(20);
-        vending_machine.release();
-
-        vending_machine.insertMoney(15);
-        vending_machine.release();
+            int choice = scn.nextInt();
+            if(choice == 1){
+                System.out.println("Amount : ");
+                int money = scn.nextInt();
+                vending_machine.insertMoney(money);
+            }
+            else if(choice == 2){
+                vending_machine.release();
+            }
+            else{
+                break;
+            }
+        }
     }
 }
