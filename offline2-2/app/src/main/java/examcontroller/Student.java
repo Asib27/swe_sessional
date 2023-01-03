@@ -14,10 +14,11 @@ public class Student implements Participant{
     }
 
     public void recieveMarks(int mark) {
-        System.out.println("Student Id: " + studentId + " , Mark : " + mark);
+        System.out.println("Recieved Student Id: " + studentId + " , Mark : " + mark);
     }
 
     public void sendRecheckRequest(){
+        System.out.println("Student id " + studentId + " sending reexamine request");
         mediator.notifyMediator(this);
     }
 }

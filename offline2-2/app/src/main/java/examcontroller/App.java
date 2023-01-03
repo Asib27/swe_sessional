@@ -3,12 +3,29 @@
  */
 package examcontroller;
 
+import java.util.Scanner;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+    private static Scanner scn = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        int[] marks = {95, 90, 93, 90, 96};
+        ExamController examController = new ExamController();
+
+        Examiner examiner = new Examiner(examController, marks);
+        Student[] students =  new Student[5];
+        for(int i = 0; i < 5; i++){
+            students[i] = new Student(i+1, examController);
+        }
+
+        examController.setExaminer(examiner);
+        examController.setStudents(students);
+
+
+        examiner.sendMarks();
+
+        System.out.println("Recheck student id");
+        int id = scn.nextInt();
+        students[id-1].sendRecheckRequest();
     }
 }
