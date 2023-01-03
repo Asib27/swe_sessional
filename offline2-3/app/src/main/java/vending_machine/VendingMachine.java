@@ -11,7 +11,7 @@ public class VendingMachine{
         objectPrice = 20;
         quantity = 2;
         money = 0;
-        state = new AcceptMoneyState();
+        state = new AcceptMoneyState(this);
     }
 
     int getObjectPrice(){

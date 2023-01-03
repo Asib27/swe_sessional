@@ -4,11 +4,19 @@
 package vending_machine;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        VendingMachine vending_machine = new VendingMachine();
+
+        vending_machine.insertMoney(15);
+        vending_machine.release();
+
+        vending_machine.insertMoney(10);
+        vending_machine.release();
+
+        vending_machine.insertMoney(20);
+        vending_machine.release();
+
+        vending_machine.insertMoney(15);
+        vending_machine.release();
     }
 }
