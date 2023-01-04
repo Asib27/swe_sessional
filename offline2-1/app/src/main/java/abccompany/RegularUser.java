@@ -13,7 +13,6 @@ public class RegularUser implements Observer{
     @Override
     public void update(String msg) {
         System.out.println("========== Regular User : " + username +" ============");
-        System.out.println("message " + msg);
         
         if(msg.charAt(0) == 'O' && msg.charAt(1) == 'P'){
             operationalToPartial();
@@ -22,13 +21,15 @@ public class RegularUser implements Observer{
             operationalToFull();
         }
         else if(msg.charAt(0) == 'P' && msg.charAt(1) == 'O'){
-            System.out.println("Total bill :" + 100 + " dollar");
+            System.out.println("ABC server is now operational");
+            System.out.println("Total bill :" + publisher.getMoney(this) + " dollar");
         }
         else if(msg.charAt(0) == 'P' && msg.charAt(1) == 'F'){
             System.out.println("Our server is fully down");
         }
         else if(msg.charAt(0) == 'F' && msg.charAt(1) == 'O'){
-            System.out.println("Total bill :" + 100 + " dollar");
+            System.out.println("ABC server is now operational");
+            System.out.println("Total bill :" + publisher.getMoney(this) + " dollar");
         }
         else if(msg.charAt(0) == 'O' && msg.charAt(1) == 'P'){
             System.out.println("Server is now partially down.");
@@ -46,6 +47,7 @@ public class RegularUser implements Observer{
         }
         else{
             System.out.println("Your data is copied to the server of DEF company");
+            publisher.payForFunctionality(this);
         }
     }
     
@@ -55,6 +57,7 @@ public class RegularUser implements Observer{
         System.out.println("[2] No");
         int input = App.scn.nextInt();
         if(input == 1){
+            publisher.payForFunctionality(this);
             System.out.println("Your data is copied to the server of DEF company");
         }
         else{

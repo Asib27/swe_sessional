@@ -13,7 +13,6 @@ public class PremiumUser implements Observer {
     @Override
     public void update(String msg) {
         System.out.println("========== Premium User : " + username +" ============");
-        System.out.println("message " + msg);
 
         if(msg.charAt(0) == 'O' && msg.charAt(1) == 'P'){
             operationalToPartial();
@@ -42,9 +41,11 @@ public class PremiumUser implements Observer {
         int input = App.scn.nextInt();
         if(input == 1){
             System.out.println("You are taking service from ABC and DEF server");
+            publisher.useServer(input, this);
         }
         else{
             System.out.println("You are taking service from DEF server");
+            publisher.useServer(input, this);
         }
     }
 }
