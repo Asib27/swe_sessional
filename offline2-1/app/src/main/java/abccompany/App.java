@@ -4,11 +4,15 @@
 package abccompany;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Server server =  new Server();
+
+        PremiumUser user1 = new PremiumUser(server, "premium");
+        RegularUser user2 = new RegularUser(server, "regular");
+
+        server.setState("O");
+        server.setState("P");
+        server.setState("F");
+
     }
 }
