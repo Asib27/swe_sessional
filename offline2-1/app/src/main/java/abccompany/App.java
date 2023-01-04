@@ -3,16 +3,30 @@
  */
 package abccompany;
 
+import java.util.Scanner;
+
 public class App {
+    public static Scanner scn = new Scanner(System.in);
     public static void main(String[] args) {
         Server server =  new Server();
 
         PremiumUser user1 = new PremiumUser(server, "premium");
         RegularUser user2 = new RegularUser(server, "regular");
 
-        server.setState("O");
-        server.setState("P");
-        server.setState("F");
+        while(true){
+            System.out.println("[0] Exit ");
+            System.out.println("[1] Operational ");
+            System.out.println("[2] Partially Down ");
+            System.out.println("[3] Fully Down ");
+            int input = scn.nextInt();
 
+            if(input == 1 ) server.setState("O");
+            else if(input == 2 ) server.setState("P");
+            else if(input == 3 ) server.setState("F");
+            else if(input == 0) break;
+            else {
+                System.out.println("Invalid Input. Try Again");
+            }
+        }
     }
 }
