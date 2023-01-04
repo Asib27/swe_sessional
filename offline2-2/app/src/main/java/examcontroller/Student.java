@@ -19,6 +19,6 @@ public class Student implements Participant{
 
     public void sendRecheckRequest(){
         System.out.println("Student id " + studentId + " sending reexamine request");
-        mediator.notifyMediator(this);
+        mediator.notifyMediator(this, "recheck");
     }
 }

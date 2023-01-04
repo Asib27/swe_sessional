@@ -16,8 +16,8 @@ public class ExamController implements Mediator{
     }
 
     @Override
-    public void notifyMediator(Participant participant) {
-        if(participant == examiner){
+    public void notifyMediator(Participant participant, String msg) {
+        if(participant == examiner && msg == "checked"){
             int[] marks = examiner.getMarks();
             
             System.out.println("Exam Controller");
@@ -32,7 +32,9 @@ public class ExamController implements Mediator{
         }
         else if(participant instanceof Student){
             Student s = (Student) participant;
-            examiner.reexamine(s.getStudentId());
+            System.out.println("Exam controller: Request of reexamine from studentId" + s.getStudentId());
+            int mark = examiner.reexamine(s.getStudentId());
+            s.recieveMarks(mark);
         }
     }
     
