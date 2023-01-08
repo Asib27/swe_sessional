@@ -1,8 +1,13 @@
 package examcontroller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ExamController implements Mediator{
     Examiner examiner;
     Student[] students;
+    int[] marks;
+    Set<Student> recheck = new HashSet<>();
 
     public ExamController(){
     }
@@ -18,7 +23,7 @@ public class ExamController implements Mediator{
     @Override
     public void notifyMediator(Participant participant, String msg) {
         if(participant == examiner && msg == "checked"){
-            int[] marks = examiner.getMarks();
+            marks = examiner.getMarks();
             
             System.out.println("Exam Controller");
             System.out.println("=====================");
@@ -30,11 +35,25 @@ public class ExamController implements Mediator{
                 students[i].recieveMarks(marks[i]);
             }
         }
+        else if(participant == examiner && msg == "rechecked"){
+            for(Student i: recheck){
+                int id = i.getStudentId();
+                int mark = examiner.getMarks(id);
+                if(marks[id-1] != mark){
+                    System.out.println("Exam Controller: Student id : " + id + " marks updated to " + mark);
+                }
+                else{
+                    System.out.println("Exam Controller: Student id : " + id + " marks unchanged");
+                }
+                i.recieveMarks(mark);
+            }
+            recheck.clear();
+        }
         else if(participant instanceof Student){
             Student s = (Student) participant;
             System.out.println("Exam controller: Request of reexamine from studentId" + s.getStudentId());
-            int mark = examiner.reexamine(s.getStudentId());
-            s.recieveMarks(mark);
+            examiner.reexamine(s.getStudentId());
+            recheck.add(s);
         }
     }
     

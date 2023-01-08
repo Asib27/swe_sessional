@@ -27,5 +27,7 @@ public class App {
         System.out.println("Recheck student id");
         int id = scn.nextInt();
         students[id-1].sendRecheckRequest();
+
+        examiner.sendRecheckMarks();
     }
 }

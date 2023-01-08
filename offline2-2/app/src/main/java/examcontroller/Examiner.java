@@ -27,6 +27,10 @@ public class Examiner implements Participant{
         return wrongMarks;
     }
 
+    public int getMarks(int id){
+        return wrongMarks[id-1];
+    }
+
     public void sendMarks(){
         System.out.println("Examiner sending marks to exam controller");
         System.out.println("===========================================");
@@ -36,13 +40,14 @@ public class Examiner implements Participant{
         mediator.notifyMediator(this, "checked");
     }
 
-    public int reexamine(int id){
+    public void sendRecheckMarks(){
+        System.out.println("Examiner sending recheck result to exam controller");
+        System.out.println("===================================================");
+        mediator.notifyMediator(this, "rechecked");
+    }
+
+    public void reexamine(int id){
         System.out.println("Recieved reexamine request of student id " + id);
-        if(marks[id-1] == wrongMarks[id-1]){
-            System.out.println("Marks unchanged");
-        }else{
-            System.out.println("Marks changed");
-        }
-        return marks[id-1];
+        wrongMarks[id-1] = marks[id-1];
     }
 }
