@@ -48,7 +48,7 @@ class Developer extends Employee{
 
     @Override
     public boolean delete(String name) {
-        return name == getName();
+        return name.equalsIgnoreCase(getName()) ;
     }
 
     public String getCurProject() {
@@ -88,10 +88,10 @@ abstract class EmployeeHolder extends Employee{
 
     @Override
     public boolean delete(String name) {
-        if(name == getName() && employees.size() != 0){
+        if(name.equalsIgnoreCase(getName()) && employees.size() != 0){
             System.out.println(getName() + " childlist not empty");
             return false;
-        }else if(name == getName())
+        }else if(getName().equalsIgnoreCase(name))
             return true;
         else{
             for(Employee emp: employees){
@@ -253,8 +253,8 @@ public class Main {
             String c1 = scn.next();
             String c2 = scn.next();
 
-            System.out.println(c1);
-            System.out.println(c2);
+            // System.out.println(c1);
+            // System.out.println(c2);
 
             if(c1.equalsIgnoreCase("c")  && c2.equalsIgnoreCase("c")){ // create company
                 String name = scn.next();
@@ -290,15 +290,6 @@ public class Main {
             else if(c1.equalsIgnoreCase("p")){
                 String name = scn.next();
                 
-                // SoftwareCompany e = findCompany(companyList, name);
-                // if(e == null){
-                //     System.out.println("No company with this name");
-                // }
-                // else if(c2.equalsIgnoreCase("d")){
-                //     e.print(name, false);
-                // }else{
-                //     e.print(name, true);
-                // }
                 for(SoftwareCompany s: companyList){
                     if(c2.equalsIgnoreCase("d")){
                         s.print(name, false);
@@ -310,6 +301,13 @@ public class Main {
             else if(c1.equalsIgnoreCase("q")){
                 break;
             }
+            else if(c1.equalsIgnoreCase("d")){
+                SoftwareCompany toDel = null;
+                for(SoftwareCompany s: companyList){
+                    if(s.delete(c2)) {toDel = s; break;}
+                }
+                if(toDel != null) companyList.remove(toDel);
+            }
             else{
                 System.out.println("Invalid input");
             }
@@ -319,6 +317,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        /*
+         * USAGE:
+         * c c abc - create company with name abc
+         * c p pm p abc - create project with project manager pm 
+         *                and project name p in company name abc
+         * c d dn p abc - create developer with name d 
+         *                and project name p in company name abc
+         * 
+         * p h abc - print hierarchy of abc
+         * p d abc - print description of abc
+         * d abc - deletes abc
+         */
         fromConsole(args);
     }
 }
